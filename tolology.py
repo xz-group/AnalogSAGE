@@ -199,9 +199,9 @@ if __name__ == "__main__":
                         myTestK_is_success=True
                         import insight
                         myNetlist = evalTask.evalTaskBestFit(queryID, totalcandidate)
-                        # my_new_insight = insight.get_insight(history)
-                        # myinsight[str(queryID)] = (myNetlist,my_new_insight)
-                        # print("New insight: ", my_new_insight)
+                        my_new_insight = insight.get_insight(history)
+                        myinsight[str(queryID)] = (myNetlist,my_new_insight)
+                        print("New insight: ", my_new_insight)
                         # log_file.write("New insight: \n" + my_new_insight + "\n")
                         result_test_file.flush()
                         break
