@@ -1,0 +1,1 @@
+The circuit is a single-stage gain-boosted telescopic cascode operational amplifier. It consists of an NMOS differential input pair with regulated NMOS cascodes (driven by auxiliary local amplifiers) to increase the gain, and it is loaded by a PMOS cascode current mirror that similarly employs a feedback regulating loop on the output branch to maximize output impedance.

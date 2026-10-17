@@ -1,0 +1,28 @@
+.subckt rn000083_bandgap_pin_2 gnda vdda vref iref
+* Curvature-corrected opamp bandgap VOLTAGE reference (RN case 000083), REDRAWN from the
+* paper figure /images/000083.png (same paper as rn000080, with an added nonlinear/INL
+* curvature-correction branch). Opamp forces V(va)=V(vb); PMOS mirror M1/M2/M12/M3
+* (gates = vc = opamp output). Branch A (va): R1 to gnda || diode Q1 (unit). Branch B
+* (vb): R2(=R1) to gnda || [R0 + diode Q2 (N units)] -- dVBE across R0. Curvature branch
+* (M12 -> ncorr): diode Q3 (unit) with INL correction resistors R4(=R5) injecting a
+* VBE-nonlinearity current from the va/vb branches. Output: M3 -> vref, R3 to gnda.
+* Pure voltage reference; iref is a 0-ohm alias for interface compatibility.
+* Behavioral 'amplifier' block kept (no sky130 primitive -- supply an opamp .subckt or an
+* OTA). NOTE: the exact INL wiring (R4/R5 into the M12/Q3 branch) is approximate from the
+* figure -- verify against the paper before sizing.
+Xamp va vb vc amplifier
+xm1 va vc vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm2 vb vc vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xm12 ncorr vc vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xm3 vref vc vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xq1 va va gnda gnda sky130_fd_pr__npn_05v5_W1p00L1p00 m='Q1_M'
+xq2 qe2 qe2 gnda gnda sky130_fd_pr__npn_05v5_W1p00L1p00 m='Q2_M'
+xq3 ncorr ncorr gnda gnda sky130_fd_pr__npn_05v5_W1p00L1p00 m='Q3_M'
+R1 va gnda 'RESISTOR_1'
+R2 vb gnda 'RESISTOR_2'
+R0 vb qe2 'RESISTOR_3'
+R5 vb ncorr 'RESISTOR_4'
+R4 va ncorr 'RESISTOR_5'
+R3 vref gnda 'RESISTOR_6'
+Rlink vref iref 0
+.ends rn000083_bandgap_pin_2

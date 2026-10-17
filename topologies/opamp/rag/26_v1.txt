@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier. The first stage is a PMOS input folded cascode amplifier that drives a Class AB common-source output stage, with Miller compensation implemented between the output and intermediate nodes for stability.

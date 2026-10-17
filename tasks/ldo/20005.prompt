@@ -1,0 +1,11 @@
+
+- The quiescent power consumption of the LDO should be no larger than 600 μW.
+- The DC loop gain of the LDO should be at least 55 dB.
+- The loop gain-bandwidth product (GBW) should be at least 1000000 Hz.
+- The phase margin should be at least 55 degrees.
+- The power supply rejection ratio (PSRR) at DC should be at least 35 dB.
+- The line regulation (LNR) should be no larger than 0.05 V/V per volt of supply change.
+- The load regulation (LR) should be no larger than 0.5 per ampere of load change.
+- The output voltage offset (vos) at maximum load should be no larger than 0.04 V.
+- The transient undershoot under a 10 μA to 10 mA load step should be no larger than 0.4 V.
+- The transient overshoot under a 10 mA to 10 μA load step should be no larger than 0.4 V.

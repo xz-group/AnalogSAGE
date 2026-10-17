@@ -1,0 +1,14 @@
+.subckt OPAMP22_Pin_3 gnda vdda vinn vinp vout
+xm4 vout ib4 gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm3 ib4 VB1 ib2 gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xm2 vdda ib3 ib2 gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xm1 ib3 vinn ib1 gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xm0 vdda vinp ib1 gnda sky130_fd_pr__nfet_01v8 l='N5_L' w='N5_W*1' m='N5_M'
+C0 vout ib3 'CAPACITOR_0'
+C1 vout ib4 'CAPACITOR_1'
+R0 vdda vout 'RESISTOR_0'
+I0 ib1 gnda 'IB1'
+I1 ib2 gnda 'IB2'
+I2 vdda ib3 'IB3'
+I3 vdda ib4 'IB4'
+.ends OPAMP22_Pin_3

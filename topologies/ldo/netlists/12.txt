@@ -1,0 +1,11 @@
+.subckt ldo_pmos5t_miller_pin_3 gnda vdda vref vfb vout
+x0 nbias nbias vdda vdda sky130_fd_pr__pfet_01v8 l='BIAS_L' w='BIAS_W*1' m='BIAS_M'
+x1 tail nbias vdda vdda sky130_fd_pr__pfet_01v8 l='BIAS_L' w='BIAS_W*1' m='BIAS_M'
+x2 n1 vfb tail vdda sky130_fd_pr__pfet_01v8 l='IN_L' w='IN_W*1' m='IN_M'
+x3 vg vref tail vdda sky130_fd_pr__pfet_01v8 l='IN_L' w='IN_W*1' m='IN_M'
+x4 n1 n1 gnda gnda sky130_fd_pr__nfet_01v8 l='MIR_L' w='MIR_W*1' m='MIR_M'
+x5 vg n1 gnda gnda sky130_fd_pr__nfet_01v8 l='MIR_L' w='MIR_W*1' m='MIR_M'
+x6 vout vg vdda vdda sky130_fd_pr__pfet_01v8 l='PASS_L' w='PASS_W*1' m='PASS_M'
+C0 vg vout 'CC'
+R0 nbias gnda 'RBIAS'
+.ends Ldo_PMOS5T_Miller_Pin_3

@@ -1,0 +1,10 @@
+.subckt OPAMP25_Pin_3 gnda vdda vinn vinp vout
+xm2 vout net13 vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm1 net12 net12 vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xm0 net13 net12 vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xm6 vout vb1 gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm5 net9 vb1 gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xm4 net13 vinn net9 gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xm3 net12 vinp net9 gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+V0 vb1 gnda 'VB1'
+.ends OPAMP25_Pin_3

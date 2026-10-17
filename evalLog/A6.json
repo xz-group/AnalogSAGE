@@ -1,0 +1,116 @@
+{
+  "task": "A6",
+  "run_id": 6,
+  "methods": {
+    "AnalogSAGE (Ours)": {
+      "tests": 15,
+      "solved": 13,
+      "pass@1": 86.67,
+      "pass@5": 100.0,
+      "avg_iter": 1.73,
+      "results": {
+        "1": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "2": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "3": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        },
+        "4": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        },
+        "5": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        },
+        "6": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "7": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        },
+        "8": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        },
+        "9": {
+          "iters": [
+            "fail",
+            "fail",
+            "fail"
+          ],
+          "solved": false
+        },
+        "10": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "11": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "12": {
+          "iters": [
+            "fail",
+            "fail",
+            "fail"
+          ],
+          "solved": false
+        },
+        "13": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        },
+        "14": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "15": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        }
+      }
+    }
+  }
+}

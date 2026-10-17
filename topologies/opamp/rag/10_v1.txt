@@ -1,0 +1,1 @@
+The circuit employs a two-stage topology, starting with a PMOS differential input pair that drives an NMOS folded cascode stage for differential-to-single-ended conversion. The resulting high-impedance node drives a complementary push-pull output stage, with Miller compensation connected between the output and one of the differential pair's drains.

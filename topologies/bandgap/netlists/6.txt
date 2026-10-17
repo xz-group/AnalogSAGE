@@ -1,0 +1,45 @@
+.subckt sonnet5_2_bandgap_pin_2 gnda vdda vref iref
+* Dual-loop self-biased bandgap (source: claude-sonnet-5, dts21 princeton run 20260716-180218;
+* original pin rout_node renamed iref here). Two independent 5T OTAs: Amp1 forces V(q_top)=
+* V(nodep) across the 1x/8x PNP pair + R1 (PTAT branch), Amp2 forces V(r2top)=V(nodep) across
+* R2 (CTAT branch). Both amp outputs drive matched PMOS mirrors that are summed at iref_sum
+* (sensed by a diode NMOS, then cascode-mirrored out to iref) and separately at vref (through R3).
+* Startup: Rst/Xstsense/Xstkick1/Xstkick2 kick both amp outputs low if iref_sum reads zero.
+xp1a amp1_ld1 amp1_ld1 vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xp2a amp1_out amp1_ld1 vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xp1b amp2_ld1 amp2_ld1 vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xp2b amp2_out amp2_ld1 vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+x1a nodep amp1_out vdda vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+x2a q_top amp1_out vdda vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+x4a r2top amp2_out vdda vdda sky130_fd_pr__pfet_01v8 l='P7_L' w='P7_W*1' m='P7_M'
+x3a iref_sum amp1_out vdda vdda sky130_fd_pr__pfet_01v8 l='P8_L' w='P8_W*1' m='P8_M'
+x4b iref_sum amp2_out vdda vdda sky130_fd_pr__pfet_01v8 l='P9_L' w='P9_W*1' m='P9_M'
+x3b vref amp1_out vdda vdda sky130_fd_pr__pfet_01v8 l='P10_L' w='P10_W*1' m='P10_M'
+x4c vref amp2_out vdda vdda sky130_fd_pr__pfet_01v8 l='P11_L' w='P11_W*1' m='P11_M'
+x3c cb_top amp1_out vdda vdda sky130_fd_pr__pfet_01v8 l='P12_L' w='P12_W*1' m='P12_M'
+x4d cb_top amp2_out vdda vdda sky130_fd_pr__pfet_01v8 l='P13_L' w='P13_W*1' m='P13_M'
+xnbias0 nbias0 nbias0 gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xntail1 amp1_tail nbias0 gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xntail2 amp2_tail nbias0 gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xn1a amp1_ld1 q_top amp1_tail gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xn2a amp1_out nodep amp1_tail gnda sky130_fd_pr__nfet_01v8 l='N5_L' w='N5_W*1' m='N5_M'
+xn1b amp2_ld1 r2top amp2_tail gnda sky130_fd_pr__nfet_01v8 l='N6_L' w='N6_W*1' m='N6_M'
+xn2b amp2_out nodep amp2_tail gnda sky130_fd_pr__nfet_01v8 l='N7_L' w='N7_W*1' m='N7_M'
+xnsense iref_sum iref_sum gnda gnda sky130_fd_pr__nfet_01v8 l='N8_L' w='N8_W*1' m='N8_M'
+xncb1 cb_top cb_top cb_mid gnda sky130_fd_pr__nfet_01v8 l='N9_L' w='N9_W*1' m='N9_M'
+xncb2 cb_mid cb_mid gnda gnda sky130_fd_pr__nfet_01v8 l='N10_L' w='N10_W*1' m='N10_M'
+xnout1 cas_mid iref_sum gnda gnda sky130_fd_pr__nfet_01v8 l='N11_L' w='N11_W*1' m='N11_M'
+xnout1cas iref cb_top cas_mid gnda sky130_fd_pr__nfet_01v8 l='N12_L' w='N12_W*1' m='N12_M'
+xstsense st_top iref_sum gnda gnda sky130_fd_pr__nfet_01v8 l='N13_L' w='N13_W*1' m='N13_M'
+xstkick1 amp1_out st_top gnda gnda sky130_fd_pr__nfet_01v8 l='N14_L' w='N14_W*1' m='N14_M'
+xstkick2 amp2_out st_top gnda gnda sky130_fd_pr__nfet_01v8 l='N15_L' w='N15_W*1' m='N15_M'
+xq1 gnda gnda nodep sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q1_M'
+xq2 gnda gnda q_bot sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q2_M'
+Camp1 amp1_out gnda 'CAPACITOR_1'
+Camp2 amp2_out gnda 'CAPACITOR_2'
+Rbias0 vdda nbias0 'RESISTOR_1'
+R1 q_top q_bot 'RESISTOR_2'
+R2 r2top gnda 'RESISTOR_3'
+R3 vref gnda 'RESISTOR_4'
+Rst vdda st_top 'RESISTOR_5'
+.ends sonnet5_2_bandgap_pin_2

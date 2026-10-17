@@ -1,0 +1,1 @@
+The circuit is a single-stage telescopic cascode operational amplifier. It features an NMOS differential pair with NMOS cascodes, loaded by a cascoded PMOS current mirror, to achieve high gain at the output node.

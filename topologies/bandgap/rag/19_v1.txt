@@ -1,0 +1,1 @@
+The circuit is a CMOS self-biased current reference utilizing a beta-multiplier mirror (M1-M4) to establish a stable operating current. This current then drives a diode-connected PNP transistor (Q2), whose emitter node directly provides the circuit's Vbe output reference.

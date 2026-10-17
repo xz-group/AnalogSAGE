@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier, with the first stage comprising a PMOS input folded cascode differential amplifier. The second stage is an NMOS common-source amplifier using a resistive load, and a compensation capacitor is present between the output and an internal node of the folded cascode.

@@ -1,0 +1,40 @@
+.subckt fable5_bandgap_pin_2 gnda vdda vref iref
+* Banba-style current-mode bandgap (source: claude-fable-5, dts21 princeton run 20260717-131441).
+* Composite resistors (res_high_po + res_xhigh_po in series) cancel TC; PMOS current mirrors
+* replicate the core current to the vref (resistive) and iref (cascoded NMOS mirror) outputs.
+* Startup: xmps/xrs senses I/4 through a composite resistor; if the loop current is low,
+* sn is pulled high and xms2 pulls pbias down to kick-start the core.
+xmpb pb2 pb2 vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xmat tailn pb2 vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xma1 n1 r2bm tailn tailn sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xma2 pbias r2am tailn tailn sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xmp1 nA pbias vdda vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+xmp2 nB pbias vdda vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+xmpv vref pbias vdda vdda sky130_fd_pr__pfet_01v8 l='P7_L' w='P7_W*1' m='P7_M'
+xmpi irefin pbias vdda vdda sky130_fd_pr__pfet_01v8 l='P8_L' w='P8_W*1' m='P8_M'
+xmpc5 vcasn pbias vdda vdda sky130_fd_pr__pfet_01v8 l='P9_L' w='P9_W*1' m='P9_M'
+xmps vs pbias vdda vdda sky130_fd_pr__pfet_01v8 l='P10_L' w='P10_W*1' m='P10_M'
+xms1 sn gnda vdda vdda sky130_fd_pr__pfet_01v8 l='P11_L' w='P11_W*1' m='P11_M'
+xma3 n1 n1 gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xma4 pbias n1 gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xmn1 irefin irefin gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xmn5 vcasn vcasn gnda gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xmn2 ncasc irefin gnda gnda sky130_fd_pr__nfet_01v8 l='N5_L' w='N5_W*1' m='N5_M'
+xmn2c iref vcasn ncasc gnda sky130_fd_pr__nfet_01v8 l='N6_L' w='N6_W*1' m='N6_M'
+xms3 sn vs gnda gnda sky130_fd_pr__nfet_01v8 l='N7_L' w='N7_W*1' m='N7_M'
+xms2 pbias sn gnda gnda sky130_fd_pr__nfet_01v8 l='N8_L' w='N8_W*1' m='N8_M'
+xq1 gnda gnda nA sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q1_M'
+xq2 gnda gnda nE2 sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q2_M'
+xcc pbias vdda sky130_fd_pr__cap_mim_m3_1 w='CAPACITOR_1' l='CAPACITOR_1'
+xrb pb2 gnda gnda sky130_fd_pr__res_xhigh_po_0p69 l='RESISTOR_1'
+xr2a_h nA r2am gnda sky130_fd_pr__res_high_po_0p69 l='RESISTOR_2'
+xr2a_x r2am gnda gnda sky130_fd_pr__res_xhigh_po_0p69 l='RESISTOR_3'
+xr1_h nB r1m gnda sky130_fd_pr__res_high_po_0p69 l='RESISTOR_4'
+xr1_x r1m nE2 gnda sky130_fd_pr__res_xhigh_po_0p69 l='RESISTOR_5'
+xr2b_h nB r2bm gnda sky130_fd_pr__res_high_po_0p69 l='RESISTOR_6'
+xr2b_x r2bm gnda gnda sky130_fd_pr__res_xhigh_po_0p69 l='RESISTOR_7'
+xr3_h vref r3m gnda sky130_fd_pr__res_high_po_0p69 l='RESISTOR_8'
+xr3_x r3m gnda gnda sky130_fd_pr__res_xhigh_po_0p69 l='RESISTOR_9'
+xrs_h vs rsm gnda sky130_fd_pr__res_high_po_0p69 l='RESISTOR_10'
+xrs_x rsm gnda gnda sky130_fd_pr__res_xhigh_po_0p69 l='RESISTOR_11'
+.ends fable5_bandgap_pin_2

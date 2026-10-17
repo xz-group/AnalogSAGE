@@ -1,0 +1,17 @@
+.subckt ldo_nmos_telescopic_pin_3 gnda vdda vref vfb vout
+x0 ncn ncn nbn gnda sky130_fd_pr__nfet_01v8 l='BN_L' w='BN_W*1' m='BN_M'
+x1 nbn nbn gnda gnda sky130_fd_pr__nfet_01v8 l='BN_L' w='BN_W*1' m='BN_M'
+x2 ss nbn gnda gnda sky130_fd_pr__nfet_01v8 l='TAIL_L' w='TAIL_W*1' m='TAIL_M'
+x3 n1a vfb ss gnda sky130_fd_pr__nfet_01v8 l='IN_L' w='IN_W*1' m='IN_M'
+x4 n2a vref ss gnda sky130_fd_pr__nfet_01v8 l='IN_L' w='IN_W*1' m='IN_M'
+x5 n1 ncn n1a gnda sky130_fd_pr__nfet_01v8 l='NC_L' w='NC_W*1' m='NC_M'
+x6 vg ncn n2a gnda sky130_fd_pr__nfet_01v8 l='NC_L' w='NC_W*1' m='NC_M'
+x7 n1 n1 vdda vdda sky130_fd_pr__pfet_01v8 l='MP_L' w='MP_W*1' m='MP_M'
+x8 vg n1 vdda vdda sky130_fd_pr__pfet_01v8 l='MP_L' w='MP_W*1' m='MP_M'
+x9 vout vg vdda vdda sky130_fd_pr__pfet_01v8 l='PASS_L' w='PASS_W*1' m='PASS_M'
+C0 vg ncc 'CC'
+R0 ncc vout 'RC'
+C1 vg vdda 'CFF'
+R1 vout gnda 'RBL'
+I0 vdda ncn 'IBIAS'
+.ends Ldo_NMOS_Telescopic_Pin_3

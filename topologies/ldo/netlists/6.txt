@@ -1,0 +1,10 @@
+.subckt ldo_nmos_5t_vinref_pin_3 gnda vdda vref vfb vout
+x0 nb nb gnda gnda sky130_fd_pr__nfet_01v8 l='BN_L' w='BN_W*1' m='BN_M'
+x1 ntail nb gnda gnda sky130_fd_pr__nfet_01v8 l='BN_L' w='BN_W*1' m='TAIL_M'
+x2 nd vfb ntail gnda sky130_fd_pr__nfet_01v8 l='EAN_L' w='EAN_W*1' m='EAN_M'
+x3 ng vref ntail gnda sky130_fd_pr__nfet_01v8 l='EAN_L' w='EAN_W*1' m='EAN_M'
+x4 nd nd vdda vdda sky130_fd_pr__pfet_01v8 l='EAP_L' w='EAP_W*1' m='EAP_M'
+x5 ng nd vdda vdda sky130_fd_pr__pfet_01v8 l='EAP_L' w='EAP_W*1' m='EAP_M'
+x6 vout ng vdda vdda sky130_fd_pr__pfet_01v8 l='PASS_L' w='PASS_W*1' m='PASS_M'
+I0 vdda nb 'IB1'
+.ends Ldo_NMOS_5T_VinRef_Pin_3

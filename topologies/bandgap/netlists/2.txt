@@ -1,0 +1,38 @@
+.subckt opus48_1_bandgap_pin_2 gnda vdda vref iref
+* PTAT-core bandgap (source: claude-opus-4-8, dts21 princeton run 20260717-174319).
+* Originally generated as a flat/global-node netlist (no .subckt wrapper); wrapped here with
+* the canonical gnda/vdda/vref/iref pin interface. iref is a cascoded PMOS mirror output;
+* vref is a resistor-terminated replica of the same mirrored current. Q1 (1x) / Q2 (8x unit
+* PNPs) + R1 set the PTAT current; a 5T NMOS-input OTA forces V(va)=V(vb).
+* Startup: Rst weakly pulls the shared PMOS gate (vg_p) low to avoid the zero-current latch.
+xmp1 va vg_p vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xmp2 vb vg_p vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xmp3 vref vg_p vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xmpb nbd vg_p vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xmp5 n5 vg_p vdda vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+xmpc ncb vg_p vdda vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+xmpl1 n_om n_om vdda vdda sky130_fd_pr__pfet_01v8 l='P7_L' w='P7_W*1' m='P7_M'
+xmpl2 vg_p n_om vdda vdda sky130_fd_pr__pfet_01v8 l='P8_L' w='P8_W*1' m='P8_M'
+xmp5c iref vcasc n5 vdda sky130_fd_pr__pfet_01v8 l='P9_L' w='P9_W*1' m='P9_M'
+xmnbd nbd nbd gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xmnt tail nbd gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xmna vg_p va tail gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xmnb n_om vb tail gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xmnc vcasc vcasc gnda gnda sky130_fd_pr__nfet_01v8 l='N5_L' w='N5_W*1' m='N5_M'
+xq1 gnda gnda va sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q1_M'
+xq2a gnda gnda ve sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q2_M'
+xq2b gnda gnda ve sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q3_M'
+xq2c gnda gnda ve sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q4_M'
+xq2d gnda gnda ve sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q5_M'
+xq2e gnda gnda ve sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q6_M'
+xq2f gnda gnda ve sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q7_M'
+xq2g gnda gnda ve sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q8_M'
+xq2h gnda gnda ve sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q9_M'
+R2a va gnda 'RESISTOR_1'
+R2b vb gnda 'RESISTOR_2'
+R1 vb ve 'RESISTOR_3'
+R3 vref gnda 'RESISTOR_4'
+Rst vg_p gnda 'RESISTOR_5'
+Rcb ncb vcasc 'RESISTOR_6'
+Cc vg_p gnda 'CAPACITOR_1'
+.ends opus48_1_bandgap_pin_2

@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier, featuring a PMOS input differential pair with NMOS folded cascode loads in its first stage. The second stage comprises a class AB output buffer, driven by the folded cascode outputs and compensated via a Miller capacitor connected between an input differential pair drain and the single-ended output.

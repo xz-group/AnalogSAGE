@@ -1,0 +1,3 @@
+{
+  "_note": "Seed experience for the Evolution Memory. Empty by default; you can add seed experience here. Keys starting with '_' are ignored. Entry format: \"<task id>\": {\"topology_id\": <int>, \"experience\": \"<insight text>\"}. An entry is injected only for later tasks of the same series (a task never sees its own entry)."
+}

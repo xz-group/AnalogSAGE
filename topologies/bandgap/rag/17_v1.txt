@@ -1,0 +1,1 @@
+This is a self-biased current-mode bandgap reference utilizing a PMOS current mirror to establish currents for two main branches. A PTAT voltage, derived from diode-connected NPNs and resistors in one branch, drives a current mirrored to the output branch, where an NPN and resistor (`R2`) generate the temperature-compensated reference voltage.

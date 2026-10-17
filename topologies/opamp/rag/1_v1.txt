@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier, featuring a PMOS differential input pair with NMOS active current mirror loads. Its second stage is a PMOS common-source amplifier with an NMOS current-source load, and the circuit employs Miller-type compensation via C1 along with a feedforward capacitor C0 for stability.

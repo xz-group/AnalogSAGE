@@ -1,0 +1,12 @@
+.subckt ldo_pmos5t_pulldown_pin_3 gnda vdda vref vfb vout
+x0 nd1 vfb tail tail sky130_fd_pr__pfet_01v8 l='EAP_L' w='EAP_W*1' m='EAP_M'
+x1 eaout vref tail tail sky130_fd_pr__pfet_01v8 l='EAP_L' w='EAP_W*1' m='EAP_M'
+x2 nd1 nd1 gnda gnda sky130_fd_pr__nfet_01v8 l='EAN_L' w='EAN_W*1' m='EAN_M'
+x3 eaout nd1 gnda gnda sky130_fd_pr__nfet_01v8 l='EAN_L' w='EAN_W*1' m='EAN_M'
+x4 vout eaout vdda vdda sky130_fd_pr__pfet_01v8 l='PASS_L' w='PASS_W*1' m='PASS_M'
+x5 vout eaout gnda gnda sky130_fd_pr__nfet_01v8 l='PDN_L' w='PDN_W*1' m='PDN_M'
+C0 vout eaout 'CC'
+C1 vdda eaout 'CFF'
+R0 vout gnda 'RBLEED'
+I0 vdda tail 'ITAIL'
+.ends Ldo_PMOS5T_PullDown_Pin_3

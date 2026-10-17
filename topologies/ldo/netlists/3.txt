@@ -1,0 +1,13 @@
+.subckt ldo_foldedcascode_hier_pin_3 gnda vdda vref vfb vout
+x0 n1 vfb tail gnda sky130_fd_pr__nfet_01v8 l='L_IN' w='W_IN*1' m='M_IN'
+x1 n2 vref tail gnda sky130_fd_pr__nfet_01v8 l='L_IN' w='W_IN*1' m='M_IN'
+x2 n1 n3 vdda vdda sky130_fd_pr__pfet_01v8 l='L_LOAD' w='W_LOAD*1' m='M_LOAD'
+x3 n2 n3 vdda vdda sky130_fd_pr__pfet_01v8 l='L_LOAD' w='W_LOAD*1' m='M_LOAD'
+x4 n3 nbias vdda vdda sky130_fd_pr__pfet_01v8 l='L_CASCODE' w='W_CASCODE*1' m='M_CASCODE'
+x5 verr_int n2 vdda vdda sky130_fd_pr__pfet_01v8 l='L_OUT' w='W_OUT*1' m='M_OUT'
+x6 verr_int n3 gnda gnda sky130_fd_pr__nfet_01v8 l='L_OUTTAIL' w='W_OUTTAIL*1' m='M_OUTTAIL'
+x7 nbias nbias vdda vdda sky130_fd_pr__pfet_01v8 l='L_BIAS' w='W_BIAS*1' m='M_BIAS'
+x8 vout verr_int vdda vdda sky130_fd_pr__pfet_01v8 l='PASS_L' w='PASS_W*1' m='PASS_M'
+C0 verr_int vfb 'CCOMP'
+I0 vdda tail 'IBIAS'
+.ends Ldo_FoldedCascode_Hier_Pin_3

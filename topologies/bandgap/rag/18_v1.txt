@@ -1,0 +1,1 @@
+This circuit is a core fragment of a current-mode bandgap reference, utilizing two diode-connected NPN transistors (Q1 and Q3) that share a common emitter node. A PMOS current mirror biases Q3, whose base voltage drives another NPN transistor (Q2); the reference output (Vref) is then generated at Q2's emitter, connected to ground via an output resistor.

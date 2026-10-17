@@ -1,0 +1,29 @@
+.subckt opus48_3_bandgap_pin_2 gnda vdda vref iref
+* PTAT-core bandgap (source: claude-opus-4-8, dts21 princeton run 20260719-214009).
+* Originally generated as a flat/global-node netlist (no .subckt wrapper); wrapped here with
+* the canonical gnda/vdda/vref/iref pin interface. A PMOS input-pair OTA (out=og) drives a
+* matched PMOS mirror array so V(va)=V(vb) across the 1x/8x PNP pair; vref = R3 * Icore.
+* iref is taken from an extra matched mirror leg (XM4, originally only used by the source
+* run's harness for an AC output-resistance probe) rather than from the vref branch itself,
+* since that branch has no separately buffered current output of its own.
+* Startup: XMsp/XMsn/XMs1 form a comparator that pulls og low until va rises off 0V.
+xm1 va og vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm2 vb og vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xm3 vref og vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xmt st og vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xmp1 n1 vb st vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+xmp2 og va st vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+xmsp vsu vsu vdda vdda sky130_fd_pr__pfet_01v8 l='P7_L' w='P7_W*1' m='P7_M'
+xm4 iref og vdda vdda sky130_fd_pr__pfet_01v8 l='P8_L' w='P8_W*1' m='P8_M'
+xml1 n1 n1 gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xml2 og n1 gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xmsn vsu va gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xms1 og vsu gnda gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xq1 gnda gnda va sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q1_M'
+xq2 gnda gnda vc sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q2_M'
+Cc og gnda 'CAPACITOR_1'
+RR2a va gnda 'RESISTOR_1'
+RR2b vb gnda 'RESISTOR_2'
+RR1 vb vc 'RESISTOR_3'
+RR3 vref gnda 'RESISTOR_4'
+.ends opus48_3_bandgap_pin_2

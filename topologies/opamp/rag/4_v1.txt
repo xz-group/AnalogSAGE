@@ -1,0 +1,1 @@
+The circuit is a multi-stage operational amplifier, featuring a PMOS input differential pair in a folded cascode configuration. Its differential output is converted to complementary single-ended signals that drive a Class AB common-source output stage, with Miller compensation connected to the PMOS driver.

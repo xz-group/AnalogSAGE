@@ -1,0 +1,108 @@
+{
+  "task": "G4",
+  "run_id": 10004,
+  "methods": {
+    "AnalogSAGE (Ours)": {
+      "tests": 15,
+      "solved": 15,
+      "pass@1": 100.0,
+      "pass@5": 100.0,
+      "avg_iter": 1.2,
+      "results": {
+        "1": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "2": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "3": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "4": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "5": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        },
+        "6": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "7": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "8": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        },
+        "9": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "10": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "11": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "12": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "13": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "14": {
+          "iters": [
+            "success"
+          ],
+          "solved": true
+        },
+        "15": {
+          "iters": [
+            "fail",
+            "success"
+          ],
+          "solved": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.subckt sonnet5_4_bandgap_pin_2 gnda vdda vref iref
+* Kuijk-PTAT bandgap with a genuine reusable .subckt interface (source: claude-sonnet-5,
+* dts21 princeton run 20260716-101447; original pins vdd/gnd/vref_out/iref_pin renamed to
+* the canonical gnda/vdda/vref/iref here). A 5T NMOS-input OTA (out=drB) forces V(v1)=V(v2b)
+* across the 1x/8x PNP pair + Rptat. vref is a ratio-based divider (Rdiva/Rdivb) tapped off a
+* separate replica PNP branch (Q3); iref is a genuinely independent output, summing a CTAT
+* replica-diode current (Q1rep/Rctat) with a mirrored copy of the core PTAT current at nodeR,
+* then buffered through a cascoded NMOS mirror (xmncasc1/2, xmnoutb/xmnoutc) -- the cleanest
+* separation of vref/iref of any converted run. Startup: an RC kick (csu/rsu) plus a weak
+* static pulldown (rstartup) pull drB low if the core never turns on.
+xmpl1 drA drA vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xmpl2 drB drA vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xmp1 v1 drB vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xmp2 v2b drB vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xmp3 v3top drB vdda vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+xmp1rep v1rep drB vdda vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+xmpa nodeR drB vdda vdda sky130_fd_pr__pfet_01v8 l='P7_L' w='P7_W*1' m='P7_M'
+xmpcascb cb2 drB vdda vdda sky130_fd_pr__pfet_01v8 l='P8_L' w='P8_W*1' m='P8_M'
+xmnb nb nb gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xmna drA v2b tail gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xmnbp drB v1 tail gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xmnt tail nb gnda gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xmnref nodeR nodeR gnda gnda sky130_fd_pr__nfet_01v8 l='N5_L' w='N5_W*1' m='N5_M'
+xmncasc2 cb2 cb2 cb1 gnda sky130_fd_pr__nfet_01v8 l='N6_L' w='N6_W*1' m='N6_M'
+xmncasc1 cb1 cb1 gnda gnda sky130_fd_pr__nfet_01v8 l='N7_L' w='N7_W*1' m='N7_M'
+xmnoutb outmid nodeR gnda gnda sky130_fd_pr__nfet_01v8 l='N8_L' w='N8_W*1' m='N8_M'
+xmnoutc iref cb2 outmid gnda sky130_fd_pr__nfet_01v8 l='N9_L' w='N9_W*1' m='N9_M'
+xmsu drB kick gnda gnda sky130_fd_pr__nfet_01v8 l='N10_L' w='N10_W*1' m='N10_M'
+xq1 gnda gnda v1 sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q1_M'
+xq2 gnda gnda vE2 sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q2_M'
+xq3 gnda gnda v3 sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q3_M'
+xq1rep gnda gnda v1rep sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q4_M'
+Csu vdda kick 'CAPACITOR_1'
+Rbias vdda nb 'RESISTOR_1'
+Rptat v2b vE2 'RESISTOR_2'
+R3 v3top v3 'RESISTOR_3'
+Rdiva v3top vref 'RESISTOR_4'
+Rdivb vref gnda 'RESISTOR_5'
+Rctat v1rep nodeR 'RESISTOR_6'
+Rsu kick gnda 'RESISTOR_7'
+Rstartup drB gnda 'RESISTOR_8'
+.ends sonnet5_4_bandgap_pin_2

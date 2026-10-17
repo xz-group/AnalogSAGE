@@ -1,0 +1,15 @@
+Design an operational amplifier for task 10001.
+The source row name (Cascode_Miller) is retained only for traceability; the design does not need to use that topology.
+- Load capacitance (CLoad): 10 pF.
+- The DC gain (dB) should be at least 60.
+- The phase margin (degrees) should be at least 45.
+- The phase margin (degrees) should be no more than 90.
+- The power-supply rejection ratio, PSRR (dB) should be at least 60.
+- The DC common-mode rejection ratio, CMRR (dB) should be at least 60.
+- The absolute input-referred offset, |VOS| (V) should be no more than 0.0001.
+- The absolute temperature coefficient, |TC| (1/°C) should be no more than 5e-05.
+- The settling time (s) should be greater than 0.
+- The settling time (s) should be no more than 5e-06.
+- The power consumption (μW) should be greater than 0.
+- The FOML = SR[V/μs] × CLoad[pF] / Power[mW] should be at least 30.
+- The FOMS = GBW[MHz] × CLoad[pF] / Power[mW] should be at least 100.

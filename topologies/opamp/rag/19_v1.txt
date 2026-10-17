@@ -1,0 +1,1 @@
+The circuit is a single-stage operational amplifier. It comprises an NMOS differential pair biased by a current source, utilizing a PMOS current mirror as an active load to provide gain at the output node, with an additional capacitor for compensation.

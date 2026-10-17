@@ -1,0 +1,6 @@
+# Python >= 3.10. Also requires ngspice (tested with ngspice-47) and the SKY130 PDK.
+numpy>=1.24      # tested with 2.5.2
+openai>=1.0      # tested with 2.53.0; also used for Gemini via the OpenAI-compatible endpoint
+pinecone>=5.0
+rank-bm25>=0.2.2
+PySpice>=1.5     # tested with 1.5; builds the refined-topology netlists (its simulator interface is not used)

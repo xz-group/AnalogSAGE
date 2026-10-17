@@ -1,0 +1,4 @@
+
+- The DC gain of the operational amplifier should be at least 18 dB.
+- The gain-bandwidth product (GBW) should be at least 3e+06 Hz.
+- The power consumption should be no larger than 65 uW.

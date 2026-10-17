@@ -1,0 +1,21 @@
+Netlist check (load only, no analysis)
+
+* Used by Circuit.check_netlist for refined topologies before they are sized: ngspice
+* expands the subcircuit, binds the SKY130 models and evaluates the sizing expressions
+* at mid-range values. Errors are read from the log (simulation/ngspice.py: parse_check).
+
+.include ./var.spice
+.param mc_mm_switch=0
+.param mc_pr_switch=0
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/corners/tt.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/r+c/res_typical__cap_typical.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/r+c/res_typical__cap_typical__lin.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/corners/tt/specialized_cells.spice
+.include ./@NETLIST@
+@AUX@
+@INSTANCE@
+
+.control
+echo NETLIST_PARSED
+.endc
+.end

@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier where the first stage is an NMOS input folded cascode amplifier with an NMOS current mirror load. The second stage is an NMOS common-source amplifier with a PMOS cascode current source load, and the op-amp employs Miller compensation.

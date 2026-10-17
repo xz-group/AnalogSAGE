@@ -1,0 +1,21 @@
+.subckt rn001153_bandgap_pin_2 gnda vdda vref iref
+* Bandgap-reference topology auto-extracted from IEEE paper figure (RN dataset case 001153).
+* Device models mapped to sky130 primitives (nmos->nfet_01v8, pmos->pfet_01v8,
+* npn->npn_05v5, pnp->pnp_05v5); VDD->vdda, GND->gnda. L/W/M and R/C/I values
+* parameterized as unique variables. Companion of rn001152 (same substrate-PNP + CMOS self-bias family). vref=resistor-to-gnda reference node (R1).
+* iref is provided as a 0-ohm-linked alias of vref: these extracted fragments expose
+* a single reference node, so iref/vref share it for 4-pin interface compatibility.
+* NOTE: vref/iref pin assignment is INFERRED (source figure had no labeled reference
+* output); verify against the paper before using for sizing.
+R1 vref gnda 'RESISTOR_1'
+R2 n0 gnda 'RESISTOR_2'
+xm1 n3 n1 vref gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm2 n0 n3 vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm3 n1 n1 n4 gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xm4 n1 n3 vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xq1 gnda gnda n4 sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q1_M'
+xq2 gnda gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q2_M'
+xq3 gnda gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q3_M'
+xm5 vdda n3 n3 gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+Rlink vref iref 0
+.ends rn001153_bandgap_pin_2

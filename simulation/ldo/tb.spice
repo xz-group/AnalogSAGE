@@ -1,0 +1,102 @@
+Test LDO ACDC+Tran
+
+***************************************
+* Step 1: Circuit netlist (composed from topology) + sizing params
+***************************************
+.include ./myldo.txt
+.include ./var.spice
+.param mc_mm_switch=0
+.param mc_pr_switch=0
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/corners/tt.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/r+c/res_typical__cap_typical.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/r+c/res_typical__cap_typical__lin.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/corners/tt/specialized_cells.spice
+
+***************************************
+* Step 2: Testbench conditions
+***************************************
+.PARAM supply_voltage = 1.8
+.PARAM Vref = 1.2
+.PARAM ILOAD_MAX = 10m
+.PARAM ILOAD_MIN = 10u
+.PARAM PARAM_CLOAD = 100p
+
+V1 vdd 0 'supply_voltage'
+V2 vss 0 0
+Vindc vref_in 0 'Vref'
+
+* XLDO gnda vdda vref vfb vout   (unity feedback: vfb tied to vout)
+
+* --- Instance 1: open-loop AC (loop gain / GBW / PM), loop broken by 1T L/C ---
+xldo1 vss vdd vref_in vfb1 vreg1 ldo
+Lfb vfb1 vreg1 1T
+Cfb vfb1 signal_in 1T
+Vin signal_in 0 dc 'Vref' ac 1
+CL1 vreg1 0 'PARAM_CLOAD'
+Iload1 vreg1 0 'ILOAD_MAX'
+
+* --- Instance 2: PSRR (AC on supply) ---
+Vvddpsrr vddpsrr 0 'supply_voltage' AC=1
+xldo2 vss vddpsrr vref_in vreg2 vreg2 ldo
+CL2 vreg2 0 'PARAM_CLOAD'
+Iload2 vreg2 0 'ILOAD_MAX'
+
+* --- Instance 3: DC sweeps (LNR / LR / vos / Power) ---
+Vvdddc vdddc 0 'supply_voltage'
+xldo3 vss vdddc vref_in vreg3 vreg3 ldo
+CL3 vreg3 0 'PARAM_CLOAD'
+Iload3 vreg3 0 'ILOAD_MAX'
+
+* --- Instance 4: load-step transient (undershoot / overshoot) ---
+xldo4 vss vdd vref_in vreg4 vreg4 ldo
+CL4 vreg4 0 'PARAM_CLOAD'
+Iload4 vreg4 0 pulse('ILOAD_MIN' 'ILOAD_MAX' 10u 1p 1p 40u 100u)
+
+.control
+save all
+set filetype=ascii
+set units=degrees
+
+* Line regulation (LNR): sweep VDD +-10% at max load
+dc Vvdddc 1.62 1.98 0.005
+meas dc lnr_pp PP v(vreg3) from=1.62 to=1.98
+meas dc lnr_avg AVG v(vreg3) from=1.62 to=1.98
+let lnr = lnr_pp/lnr_avg/0.36
+print lnr
+
+* Load regulation (LR) + vos + quiescent Power: sweep load current
+dc Iload3 10u 10.01m 10u
+meas dc lr_pp PP v(vreg3) from=10u to=10m
+meas dc lr_avg AVG v(vreg3) from=10u to=10m
+let lr = lr_pp/lr_avg/9.99m
+print lr
+meas dc vout_maxload FIND v(vreg3) AT=10m
+let vos = abs(vout_maxload - 1.2)
+print vos
+* AutoSizer-compatible: dropout = VDD - Vout at nominal 10mA load (ldo_regulator_sim.py)
+let dropout_mv = (1.8 - vout_maxload)*1000
+print dropout_mv
+meas dc ivdd_minload FIND I(Vvdddc) AT=10u
+let power = -1*ivdd_minload*1.8*1e6
+print power
+
+* Loop gain / GBW / PM and PSRR at max load
+ac dec 10 0.1 1G
+meas ac dcgain find vdb(vreg1) at=0.1
+meas ac gain_bandwidth_product when vdb(vreg1)=0
+meas ac phase_margin find vp(vreg1) when vdb(vreg1)=0
+meas ac dcpsrr find vdb(vreg2) at=0.1
+let psrr = -1*dcpsrr
+print psrr
+
+* Load step transient: 10u -> 10m at 10us, back to 10u at 50us
+tran 100n 100u
+meas tran v_min MIN v(vreg4) from=5u to=50u
+meas tran v_max MAX v(vreg4) from=50u to=100u
+let undershoot = 1.2 - v_min
+let overshoot = v_max - 1.2
+print undershoot
+print overshoot
+
+.endc
+.end

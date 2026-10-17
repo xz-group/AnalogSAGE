@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier. The first stage is a differential transconductance stage implemented with multiple NMOS input transistors, PMOS current sources, and active loads; the second stage is a cascoded Class-AB common-source output stage, providing high gain and output swing.

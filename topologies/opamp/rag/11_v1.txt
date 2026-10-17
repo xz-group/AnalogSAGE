@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier. The first stage is a PMOS input folded cascode with differential-to-single-ended conversion, while the second stage is a common-source amplifier utilizing a PMOS driver and an NMOS current-source load.

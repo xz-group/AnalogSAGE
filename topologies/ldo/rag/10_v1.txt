@@ -1,0 +1,1 @@
+The circuit is a low-dropout regulator (LDO) with a PMOS pass transistor, where the error amplifier is a two-stage design consisting of an NMOS differential input pair with a PMOS current mirror load, followed by an inverter-based second gain stage. Stability is ensured by a series RC compensation network placed between the gate of the PMOS pass transistor and the output.

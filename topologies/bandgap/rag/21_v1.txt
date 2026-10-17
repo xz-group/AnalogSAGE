@@ -1,0 +1,1 @@
+The circuit is a CMOS self-biased bandgap reference, utilizing a substrate-PNP BJT for generating a temperature-dependent voltage. A feedback loop, comprising a PMOS current mirror and NMOS transistors, implicitly compares voltages derived from the PNP with the output node `vref` to establish a temperature-compensated reference voltage across an output resistor.

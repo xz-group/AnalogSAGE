@@ -1,0 +1,5 @@
+
+- The reference output voltage (vref, measured at 25 degC) should be between 0.72 V and 0.76 V.
+- The line sensitivity of vref (ls, over the supply sweep) should be no larger than 0.05 per volt (5 % per volt of supply change).
+- The power supply rejection ratio at low frequency (psrr) should be at least 25 dB.
+- The quiescent power consumption should be no larger than 110 uW.

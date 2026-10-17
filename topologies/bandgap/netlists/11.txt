@@ -1,0 +1,32 @@
+.subckt opus48_5_bandgap_pin_2 gnda vdda vref iref
+* PTAT-core bandgap with real composite (res_high_po + res_xhigh_po) resistors (source:
+* claude-opus-4-8, dts21 princeton run 20260720-010004). Originally a flat/global-node
+* netlist (no .subckt wrapper), wrapped here with the canonical pin interface. A PMOS-input
+* 5T OTA (out=vg) drives a 3-way PMOS mirror so V(na)=V(nb) across the 1x/8x PNP pair + R1.
+* NOTE: as generated, this design has only one dedicated output mirror leg (XP3, renamed
+* "out"->vref); there is no separate matched leg for a current output, so iref is tied to
+* vref by a 0-ohm link (Rlink) -- treat iref as a scaled copy of vref, not an independent
+* high-impedance current output. Startup: XNkill/XNsu pull vg low while na sits near 0V.
+xptail ntail vg vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xpa vg na ntail vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xpb nd nb ntail vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xp1 na vg vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xp2 nb vg vdda vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+xp3 vref vg vdda vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+xpsu nsu nsu vdda vdda sky130_fd_pr__pfet_01v8 l='P7_L' w='P7_W*1' m='P7_M'
+xnd nd nd gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xno vg nd gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xnkill nsu na gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xnsu vg nsu gnda gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xq1 gnda gnda na sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q1_M'
+xq2 gnda gnda ne2 sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q2_M'
+xrahp na namid gnda sky130_fd_pr__res_high_po w=1 l='RESISTOR_1'
+xraxh namid gnda gnda sky130_fd_pr__res_xhigh_po w=1 l='RESISTOR_2'
+xrbhp nb nbmid gnda sky130_fd_pr__res_high_po w=1 l='RESISTOR_3'
+xrbxh nbmid gnda gnda sky130_fd_pr__res_xhigh_po w=1 l='RESISTOR_4'
+xr1hp nb n1mid gnda sky130_fd_pr__res_high_po w=1 l='RESISTOR_5'
+xr1xh n1mid ne2 gnda sky130_fd_pr__res_xhigh_po w=1 l='RESISTOR_6'
+xr3hp vref n3mid gnda sky130_fd_pr__res_high_po w=1 l='RESISTOR_7'
+xr3xh n3mid gnda gnda sky130_fd_pr__res_xhigh_po w=1 l='RESISTOR_8'
+Rlink vref iref 0
+.ends opus48_5_bandgap_pin_2

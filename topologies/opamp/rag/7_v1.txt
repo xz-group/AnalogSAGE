@@ -1,0 +1,1 @@
+The circuit is a three-stage operational amplifier, featuring a PMOS differential input stage with NMOS current mirror loads, which feeds into a folded cascode second stage. The output of the folded cascode drives a complementary common-source output stage, with Miller compensation applied between the second and third stages for stability.

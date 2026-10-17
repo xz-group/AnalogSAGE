@@ -1,0 +1,10 @@
+.subckt ldo_nmos_5t_simple_pin_3 gnda vdda vref vfb vout
+x0 vg net019 vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+x1 net019 net019 vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+x2 vg vref ib1 gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+x3 net019 vfb ib1 gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+x4 vout vg vdda vdda sky130_fd_pr__pfet_01v8 l='PASS_L' w='PASS_W*1' m='PASS_M'
+C0 vg gnda 'CAPACITOR_0'
+C1 vdda vg 'CFF'
+I0 ib1 gnda 'IB1'
+.ends Ldo_NMOS_5T_Simple_Pin_3

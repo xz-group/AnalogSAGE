@@ -1,0 +1,7 @@
+
+- The reference output voltage (vref, measured at 25 degC with VDDA = 1.8 V) should be between 0.1 V and 1.6 V.
+- The temperature coefficient of vref (tc, peak-to-peak over -45..125 degC divided by average and span) should be no larger than 2000 ppm/degC.
+- The line sensitivity of vref (ls, over a VDDA sweep 1.62..1.98 V) should be no larger than 1.0 per volt.
+- The power supply rejection ratio at low frequency (psrr, 10 Hz) should be at least 5 dB.
+- The power supply rejection ratio at high frequency (psrr_hf, 1 MHz) should be at least 5 dB.
+- The quiescent power consumption at 25 degC and VDDA = 1.8 V should be no larger than 5000 uW.

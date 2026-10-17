@@ -1,0 +1,1 @@
+The circuit is a low-dropout regulator (LDO) with a PMOS pass transistor. Its error amplifier is a five-transistor OTA comprising an NMOS differential pair and a PMOS current-mirror load, and a capacitor between the supply and the pass gate enhances PSRR through feedforward.

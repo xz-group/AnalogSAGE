@@ -1,0 +1,14 @@
+.subckt OPAMP19_Pin_3 gnda vdda vinn vinp vout
+xm6 IB3 vb1 IB2 vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm1 IB3 vinp IB1 vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xm0 net11 vinn IB1 vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xm5 vout IB3 gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm4 IB3 net11 gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xm3 net11 net11 gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+R0 vdda vout 'RESISTOR_0'
+C0 vout IB2 'CAPACITOR_0'
+V0 vb1 gnda 'VB1'
+I0 vdda ib1 'IB1'
+I1 vdda ib2 'IB2'
+I2 ib3 gnda 'IB3'
+.ends OPAMP19_Pin_3

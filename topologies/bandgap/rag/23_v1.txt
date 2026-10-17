@@ -1,0 +1,1 @@
+The circuit is an op-amp-regulated CMOS bandgap reference, employing a PMOS current mirror to control currents in two NMOS branches that incorporate resistors R1 and R2 for the core voltage generation. The op-amp's output drives an NMOS source-follower, which then feeds an output resistor divider (R3 and R4) to produce the final temperature-compensated reference voltage.

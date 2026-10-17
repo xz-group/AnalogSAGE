@@ -1,0 +1,1 @@
+The circuit is a folded cascode operational amplifier, featuring a PMOS differential input pair with NMOS folding current sources and NMOS cascode devices. It achieves differential-to-single-ended conversion and high gain by using one cascode branch output to drive the active PMOS load for the final single-ended output.

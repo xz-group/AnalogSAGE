@@ -1,0 +1,30 @@
+.subckt opus48_2_bandgap_pin_2 gnda vdda vref iref
+* PTAT-core bandgap (source: claude-opus-4-8, dts21 princeton run 20260719-174301).
+* Originally generated as a flat/global-node netlist (no .subckt wrapper); wrapped here with
+* the canonical gnda/vdda/vref/iref pin interface. Composite resistors (res_high_po in series
+* with res_xhigh_po) cancel TC. A PMOS input-pair OTA (out=ng) forces V(iref)=V(vb) across the
+* 1x/8x PNP pair. Startup: XMstart is a diode-tied NMOS that pulls ng low until the core turns on.
+* NOTE: unlike the other converted runs, this design has no separate buffered/cascoded current
+* output stage -- the iref pin is the same node as the PTAT core's own bias leg (Q1's emitter),
+* i.e. iref here is the raw core current node, not an isolated high-impedance mirror output.
+xmp1 iref ng vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xmp2 vb ng vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xmp3 vref ng vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xmpt st ng vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xmpi1 n1 vb st vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+xmpi2 ng iref st vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+xmn1 n1 n1 gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xmn2 ng n1 gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xmstart ng ng gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xq1 gnda gnda iref sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q1_M'
+xq2 gnda gnda vc sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q2_M'
+Cc ng gnda 'CAPACITOR_1'
+xr2ap iref r2am gnda sky130_fd_pr__res_high_po w=1 l='RESISTOR_1'
+xr2an r2am gnda gnda sky130_fd_pr__res_xhigh_po w=1 l='RESISTOR_2'
+xr2bp vb r2bm gnda sky130_fd_pr__res_high_po w=1 l='RESISTOR_3'
+xr2bn r2bm gnda gnda sky130_fd_pr__res_xhigh_po w=1 l='RESISTOR_4'
+xr1p vb r1m gnda sky130_fd_pr__res_high_po w=1 l='RESISTOR_5'
+xr1n r1m vc gnda sky130_fd_pr__res_xhigh_po w=1 l='RESISTOR_6'
+xrop vref rom gnda sky130_fd_pr__res_high_po w=1 l='RESISTOR_7'
+xron rom gnda gnda sky130_fd_pr__res_xhigh_po w=1 l='RESISTOR_8'
+.ends opus48_2_bandgap_pin_2

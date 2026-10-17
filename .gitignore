@@ -1,0 +1,5 @@
+# run outputs (logs, ngspice work directories, refined netlists)
+results/
+__pycache__/
+*.pyc
+.env

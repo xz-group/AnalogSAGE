@@ -1,0 +1,1 @@
+The circuit is a self-biased current-mode bandgap reference, utilizing a PMOS current mirror to bias a cascode NMOS current sink. The output reference voltage is generated at the emitter of a substrate PNP transistor, and its temperature compensation is achieved through the interaction of the PNP's base-emitter voltage and resistor-controlled NMOS gate biasing.

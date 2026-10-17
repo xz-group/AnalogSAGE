@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier. The first stage is a PMOS differential pair with cascoded NMOS active loads and a PMOS current mirror for differential-to-single-ended conversion, generating a single-ended output at VOUTP. The second stage is a common-source PMOS amplifier driven by VOUTP, with an NMOS current source load and Miller compensation.

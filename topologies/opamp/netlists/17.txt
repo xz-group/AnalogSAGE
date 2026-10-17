@@ -1,0 +1,16 @@
+.subckt OPAMP2_Pin_3 gnda vdda vinn vinp vout
+xm8 net36 vb2 vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm7 net30 vb1 vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xm5 vout vb4 vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xm6 net33 vb3 gnda gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm1 net36 vinn net33 gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xm0 net30 vinp net33 gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xm4 vout net36 gnda gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xm3 net36 net30 gnda gnda sky130_fd_pr__nfet_01v8 l='N5_L' w='N5_W*1' m='N5_M'
+xm2 net30 net30 gnda gnda sky130_fd_pr__nfet_01v8 l='N6_L' w='N6_W*1' m='N6_M'
+C0 vout net36 'CAPACITOR_0'
+V1 vb1 0 'VB1'
+V2 vb2 0 'VB2'
+V3 vb3 0 'VB3'
+V4 vb4 0 'VB4'
+.ends OPAMP2_Pin_3

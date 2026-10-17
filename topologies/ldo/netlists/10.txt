@@ -1,0 +1,14 @@
+.subckt ldo_nmos_3stage_pmosbuf_pin_3 gnda vdda vref vfb vout
+x0 d1 vref tail gnda sky130_fd_pr__nfet_01v8 l='IN_L' w='IN_W*1' m='IN_M'
+x1 aout vfb tail gnda sky130_fd_pr__nfet_01v8 l='IN_L' w='IN_W*1' m='IN_M'
+x2 d1 d1 vdda vdda sky130_fd_pr__pfet_01v8 l='MIR_L' w='MIR_W*1' m='MIR_M'
+x3 aout d1 vdda vdda sky130_fd_pr__pfet_01v8 l='MIR_L' w='MIR_W*1' m='MIR_M'
+x4 aout2 aout vdda vdda sky130_fd_pr__pfet_01v8 l='BUF_L' w='BUF_W*1' m='BUF_M'
+x5 vbias2 vbias2 gnda gnda sky130_fd_pr__nfet_01v8 l='BIAS_L' w='BIAS_W*1' m='BIAS_M'
+x6 aout2 vbias2 gnda gnda sky130_fd_pr__nfet_01v8 l='BIAS_L' w='BIAS_W*1' m='BIAS_M'
+x7 vout aout2 vdda vdda sky130_fd_pr__pfet_01v8 l='PASS_L' w='PASS_W*1' m='PASS_M'
+R0 vdda vbias2 'RBIAS2'
+C0 aout2 rzmid 'CC'
+R1 rzmid vout 'RZ'
+I0 tail gnda 'IB1'
+.ends Ldo_NMOS_3Stage_PMOSbuf_Pin_3

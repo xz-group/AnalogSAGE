@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier. The first stage consists of a telescopic cascode PMOS differential pair with an NMOS current mirror active load, while the second stage is an NMOS common-source amplifier with a PMOS current source load and is stabilized by a cascode Miller (Ahuja) compensation capacitor connected to the internal folding/cascode node.

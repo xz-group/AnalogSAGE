@@ -1,0 +1,1 @@
+This is an all-NMOS voltage reference circuit comprising four NMOS transistors and a resistive divider, designed to generate a stable output voltage. The reference voltage `vref` is produced by a resistive divider from node `n1` to ground, with node `n1` being part of an interconnected control network formed by the other NMOS devices.

@@ -1,0 +1,7 @@
+
+- The regulated output voltage should stay within 1.19 V and 1.21 V, i.e. the output voltage offset (vos) at maximum load should be no larger than 0.01 V.
+- The dropout voltage (VDD - Vout at the nominal 10 mA load, VDD = 1.8 V) should be no larger than 650 mV.
+- The line regulation (LNR) should be no larger than 0.00042 per volt of supply change (0.5 mV/V at a 1.2 V output).
+- The load regulation (LR) should be no larger than 0.83 per ampere of load change (1 mV/mA at a 1.2 V output).
+- The power supply rejection ratio (PSRR) at DC should be at least 60 dB.
+- The quiescent power consumption of the LDO should be no larger than 20000 uW.

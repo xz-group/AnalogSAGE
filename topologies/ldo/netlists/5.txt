@@ -1,0 +1,17 @@
+.subckt ldo_pmos_2stage_buffer_pin_3 gnda vdda vref vfb vout
+x0 vb1 vb1 vdda vdda sky130_fd_pr__pfet_01v8 l='EA_BIAS_L' w='EA_BIAS_W*1' m='EA_BIAS_M'
+x1 tail vb1 vdda vdda sky130_fd_pr__pfet_01v8 l='EA_BIAS_L' w='EA_BIAS_W*1' m='EA_TAIL_M'
+x2 net014 vref tail vdda sky130_fd_pr__pfet_01v8 l='EA_IN_L' w='EA_IN_W*1' m='EA_IN_M'
+x3 net016 vfb tail vdda sky130_fd_pr__pfet_01v8 l='EA_IN_L' w='EA_IN_W*1' m='EA_IN_M'
+x4 net014 net014 gnda gnda sky130_fd_pr__nfet_01v8 l='EA_MIR_L' w='EA_MIR_W*1' m='EA_MIR_M'
+x5 net016 net014 gnda gnda sky130_fd_pr__nfet_01v8 l='EA_MIR_L' w='EA_MIR_W*1' m='EA_MIR_M'
+x6 ea_out vb1 vdda vdda sky130_fd_pr__pfet_01v8 l='EA_BIAS_L' w='EA_BIAS_W*1' m='EA_OUT_PM'
+x7 ea_out net016 gnda gnda sky130_fd_pr__nfet_01v8 l='EA_OUT_L' w='EA_OUT_W*1' m='EA_OUT_NM'
+x8 vdda ea_out ctrl gnda sky130_fd_pr__nfet_01v8 l='BUF_L' w='BUF_W*1' m='BUF_M'
+x9 vout ctrl vdda vdda sky130_fd_pr__pfet_01v8 l='PASS_L' w='PASS_W*1' m='PASS_M'
+R0 net016 net022 'RZ'
+C0 net022 ea_out 'CC'
+C1 vdda ctrl 'CFF'
+I0 vb1 gnda 'IBIAS'
+I1 ctrl gnda 'IBUF'
+.ends Ldo_PMOS_2Stage_Buffer_Pin_3

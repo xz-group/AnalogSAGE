@@ -1,0 +1,8 @@
+.subckt OPAMP4_Pin_3 gnda vdda vinn vinp vout
+xm9 vout net019 vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm8 net019 net019 vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xm3 vout vinn ib1 gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm1 net019 vinp ib1 gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+C0 vout gnda 'CAPACITOR_0'
+I0 ib1 gnda 'IB1'
+.ends OPAMP4_Pin_3

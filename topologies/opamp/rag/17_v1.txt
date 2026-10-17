@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier. The first stage features an NMOS differential pair with a common-mode tail current and a mixed-type active load, performing differential-to-single-ended conversion, while the second stage is a common-source amplifier with a PMOS current source load, compensated by a Miller capacitor.

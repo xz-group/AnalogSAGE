@@ -1,0 +1,51 @@
+.subckt sonnet5_6_bandgap_pin_2 gnda vdda vref iref
+* Separate PTAT/CTAT-loop bandgap (source: claude-sonnet-5, dts21 princeton run
+* 20260720-034229; local wrapper aliases XNU/XPU/XPC around inlined real sky130 tt-corner
+* BSIM4 bins renamed here to the canonical primitive names). Loop A (5T OTA, out=GA) forces
+* V(Y)=V(X) across the 1x/8x PNP pair + R1 (PTAT). Loop B (5T OTA, out=OUT2) regulates a CTAT
+* V-to-I converter through R_CTAT. vref sums mirrored PTAT(GA)+CTAT(OUT2) copies through R3;
+* iref is a SEPARATE summing/cascode branch (PRE_CASC2/xmpc_out) that mirrors the same two
+* gate voltages independently, buffered out through a diode-generated cascode bias
+* (xmpc_diode). NOTE: the source run's own report says vref/iref were not designed as fully
+* independent as intended, and this run's sizing FAILED spec (overall_pass=false: vref_tc
+* ~613 ppm/C vs a <=300 target, ~2x over) -- kept here as a distinct, legitimately-generated
+* but unconverged topology. Startup is not explicit here beyond the RSTART bleed resistor.
+xmp1 Y GA vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xmp2 X GA vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xmp_ptat_out vref GA vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xm_loadd1 LOADD1 LOADD1 vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xm_loadm1 GA LOADD1 vdda vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+xm_reg2 NODE_FB OUT2 vdda vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+xm_loadd2 LOADD2 LOADD2 vdda vdda sky130_fd_pr__pfet_01v8 l='P7_L' w='P7_W*1' m='P7_M'
+xm_loadm2 OUT2 LOADD2 vdda vdda sky130_fd_pr__pfet_01v8 l='P8_L' w='P8_W*1' m='P8_M'
+xmp_ctat_out vref OUT2 vdda vdda sky130_fd_pr__pfet_01v8 l='P9_L' w='P9_W*1' m='P9_M'
+xmpc_d NODE_R GA vdda vdda sky130_fd_pr__pfet_01v8 l='P10_L' w='P10_W*1' m='P10_M'
+xmpc_diode VBIASP_CASC VBIASP_CASC NODE_R vdda sky130_fd_pr__pfet_01v8 l='P11_L' w='P11_W*1' m='P11_M'
+xmp_ptat_c PRE_CASC2 GA vdda vdda sky130_fd_pr__pfet_01v8 l='P12_L' w='P12_W*1' m='P12_M'
+xmp_ctat_c PRE_CASC2 OUT2 vdda vdda sky130_fd_pr__pfet_01v8 l='P13_L' w='P13_W*1' m='P13_M'
+xmpc_out iref VBIASP_CASC PRE_CASC2 vdda sky130_fd_pr__pfet_01v8 l='P14_L' w='P14_W*1' m='P14_M'
+xm_inp1 GA Y TAIL1 gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm_inn1 LOADD1 X TAIL1 gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xm_tail1 TAIL1 VBIASN gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xm_biasn VBIASN VBIASN gnda gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xm_inn2 LOADD2 NODE_FB TAIL2 gnda sky130_fd_pr__nfet_01v8 l='N5_L' w='N5_W*1' m='N5_M'
+xm_inp2 OUT2 Y TAIL2 gnda sky130_fd_pr__nfet_01v8 l='N6_L' w='N6_W*1' m='N6_M'
+xm_tail2 TAIL2 VBIASN gnda gnda sky130_fd_pr__nfet_01v8 l='N7_L' w='N7_W*1' m='N7_M'
+x_q1 gnda gnda Y sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q1_M'
+x_q2a gnda gnda Z sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q2_M'
+x_q2b gnda gnda Z sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q3_M'
+x_q2c gnda gnda Z sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q4_M'
+x_q2d gnda gnda Z sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q5_M'
+x_q2e gnda gnda Z sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q6_M'
+x_q2f gnda gnda Z sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q7_M'
+x_q2g gnda gnda Z sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q8_M'
+x_q2h gnda gnda Z sky130_fd_pr__pnp_05v5_W0p68L0p68 m='Q9_M'
+CGA GA gnda 'CAPACITOR_1'
+COUT2 OUT2 gnda 'CAPACITOR_2'
+R1 X Z sky130_fd_pr__res_generic_l1 w=2 l='RESISTOR_1'
+RSTART GA gnda sky130_fd_pr__res_generic_po w=2 l='RESISTOR_2'
+RBIASN vdda VBIASN sky130_fd_pr__res_generic_po w=2 l='RESISTOR_3'
+R_CTAT NODE_FB gnda sky130_fd_pr__res_generic_l1 w=2 l='RESISTOR_4'
+R3 vref gnda sky130_fd_pr__res_generic_l1 w=2 l='RESISTOR_5'
+RSINK VBIASP_CASC gnda 'RESISTOR_6'
+.ends sonnet5_6_bandgap_pin_2

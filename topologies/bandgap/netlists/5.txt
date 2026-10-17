@@ -1,0 +1,46 @@
+.subckt sonnet5_1_bandgap_pin_2 gnda vdda vref iref
+* PTAT-core bandgap with two independent 5T-OTA loops (source: claude-sonnet-5, dts21
+* princeton run 20260716-151555; original subckt name bandgap_ptat, pins reordered here to
+* the canonical gnda/vdda/vref/iref interface). Loop 1 forces V(A)=V(B) across the 1x/8x PNP
+* pair through R1 (PTAT core current). Loop 2 replicates that current onto a BG node through
+* Q3+R3, then a second matched mirror stage buffers it out to the iref pin (Xp_iref_out) while
+* vref is a resistive divider (Rd1/Rd2) tapped off BG.
+* Startup: Rst/Xnclamp/Xstart pull VG down until node A rises off 0V.
+x1 A VG vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+x2 B VG vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xpld1 ND1 ND1 vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xpld2 VG ND1 vdda vdda sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+x5 BG VG vdda vdda sky130_fd_pr__pfet_01v8 l='P5_L' w='P5_W*1' m='P5_M'
+xpld1b ND1B ND1B vdda vdda sky130_fd_pr__pfet_01v8 l='P6_L' w='P6_W*1' m='P6_M'
+xpld2b VG2 ND1B vdda vdda sky130_fd_pr__pfet_01v8 l='P7_L' w='P7_W*1' m='P7_M'
+xp_iref_pass RTOP VG2 vdda vdda sky130_fd_pr__pfet_01v8 l='P8_L' w='P8_W*1' m='P8_M'
+xp_iref_out iref VG2 vdda vdda sky130_fd_pr__pfet_01v8 l='P9_L' w='P9_W*1' m='P9_M'
+xnin1 ND1 B TAIL gnda sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xnin2 VG A TAIL gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+xntl TAIL VBN gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xbiasd VBN VBN gnda gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+xnclamp DET A gnda gnda sky130_fd_pr__nfet_01v8 l='N5_L' w='N5_W*1' m='N5_M'
+xstart VG DET gnda gnda sky130_fd_pr__nfet_01v8 l='N6_L' w='N6_W*1' m='N6_M'
+xnin1b ND1B RTOP TAIL2 gnda sky130_fd_pr__nfet_01v8 l='N7_L' w='N7_W*1' m='N7_M'
+xnin2b VG2 BG TAIL2 gnda sky130_fd_pr__nfet_01v8 l='N8_L' w='N8_W*1' m='N8_M'
+xntlb TAIL2 VBN gnda gnda sky130_fd_pr__nfet_01v8 l='N9_L' w='N9_W*1' m='N9_M'
+xq1 A gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q1_M'
+xq2a C gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q2_M'
+xq2b C gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q3_M'
+xq2c C gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q4_M'
+xq2d C gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q5_M'
+xq2e C gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q6_M'
+xq2f C gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q7_M'
+xq2g C gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q8_M'
+xq2h C gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q9_M'
+xq3 D3 gnda gnda sky130_fd_pr__pnp_05v5_W3p40L3p40 m='Q10_M'
+Ccomp VG gnda 'CAPACITOR_1'
+Ccomp2 VG2 gnda 'CAPACITOR_2'
+R1 B C 'RESISTOR_1'
+Rbiasamp vdda VBN 'RESISTOR_2'
+Rst vdda DET 'RESISTOR_3'
+R3 BG D3 'RESISTOR_4'
+Riref RTOP gnda 'RESISTOR_5'
+Rd1 BG vref 'RESISTOR_6'
+Rd2 vref gnda 'RESISTOR_7'
+.ends sonnet5_1_bandgap_pin_2

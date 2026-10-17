@@ -1,0 +1,32 @@
+.subckt rn000378_bandgap_pin_2 gnda vdda vref iref
+* Bandgap-reference topology auto-extracted from IEEE paper figure (RN dataset case 000378
+* = 1202001_image_6). Device models mapped to sky130 primitives (nmos->nfet_01v8,
+* pmos->pfet_01v8, npn->npn_05v5, pnp->pnp_05v5); VDD->vdda, GND->gnda. L/W/M and R/C/I
+* values parameterized as unique variables. Op-amp-regulated CMOS reference: PMOS mirror
+* (M3 diode / M4) + NMOS branch pair (M2/M5) + R1/R2 core divider; M6 source-follower drives
+* the R3/R4 output divider. vref=output-divider node n4 (R3 to gnda).
+* iref is provided as a 0-ohm-linked alias of vref: these extracted fragments expose
+* a single reference node, so iref/vref share it for 4-pin interface compatibility.
+* WARNING: this extraction is PARTIALLY DEGRADED -- (a) the op-amp X1 was captured with only
+* 2 pins (n5, gnda) and is kept VERBATIM as a behavioral 'amplifier' black box; an opamp
+* .subckt named 'amplifier' (with correct input connectivity) must be supplied by the
+* testbench or replaced with a transistor-level OTA before sky130 simulation. (b) M8 is
+* transcribed with gate tied to gnda as extracted (off device / MOS-cap, likely a startup
+* or decoupling artifact). Transcribed from netlist/000378.cir ground truth.
+* NOTE: vref/iref pin assignment is INFERRED (source figure labels the output 'Vref' but the
+* extraction has no port); verify against the paper before using for sizing.
+xm1 n3 n0 vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm2 n1 n2 n6 n6 sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm3 n1 n1 vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xm4 n0 n1 vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+R1 n2 n3 'RESISTOR_1'
+xm5 n0 n7 n6 n6 sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+R2 n2 gnda 'RESISTOR_2'
+R3 vref gnda 'RESISTOR_3'
+R4 vref n7 'RESISTOR_4'
+xm6 vdda n5 n7 n7 sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xm7 n5 n5 vdda n5 sky130_fd_pr__pfet_01v8 l='P4_L' w='P4_W*1' m='P4_M'
+xm8 n6 gnda gnda gnda sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+X1 n5 gnda amplifier
+Rlink vref iref 0
+.ends rn000378_bandgap_pin_2

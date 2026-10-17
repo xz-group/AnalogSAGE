@@ -1,0 +1,12 @@
+.subckt ldo_nmos_5t_millerrz_pin_3 gnda vdda vref vfb vout
+x0 ibias ibias gnda gnda sky130_fd_pr__nfet_01v8 l='LN_MIR' w='WN_MIR*1' m='MN_M6'
+x1 tail ibias gnda gnda sky130_fd_pr__nfet_01v8 l='LN_MIR' w='WN_MIR*1' m='NMIR'
+x2 eaout vref tail gnda sky130_fd_pr__nfet_01v8 l='LN_DIFF' w='WN_DIFF*1' m='MN_DIFF'
+x3 nmir vfb tail gnda sky130_fd_pr__nfet_01v8 l='LN_DIFF' w='WN_DIFF*1' m='MN_DIFF'
+x4 nmir nmir vdda vdda sky130_fd_pr__pfet_01v8 l='LP_LOAD' w='WP_LOAD*1' m='MP_LOAD'
+x5 eaout nmir vdda vdda sky130_fd_pr__pfet_01v8 l='LP_LOAD' w='WP_LOAD*1' m='MP_LOAD'
+x6 vout eaout vdda vdda sky130_fd_pr__pfet_01v8 l='LP_PASS' w='WP_PASS*1' m='MP_PASS'
+R0 eaout compmid 'RZ'
+C0 compmid vout 'CC'
+I0 vdda ibias 'IBIAS'
+.ends Ldo_NMOS_5T_MillerRz_Pin_3

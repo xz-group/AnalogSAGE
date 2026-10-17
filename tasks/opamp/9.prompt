@@ -1,0 +1,8 @@
+
+- The power consumption of the amplifier should be no larger than 2 μW.
+- The DC gain of the amplifier should be at least 45 dB.
+- The common-mode rejection ratio (CMRR) at DC should be at least 30 dB.
+- The power supply rejection ratio (PSRR) should be at least 30 dB.
+- The gain-bandwidth product (GBW) should be at least 1000000 Hz.
+- The phase margin should be at least 45 degrees.
+- The power supply noise rejection (PSRN) should be at least 30 dB.

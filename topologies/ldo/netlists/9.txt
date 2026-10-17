@@ -1,0 +1,12 @@
+.subckt ldo_nmos_buffer_hvt_pin_3 gnda vdda vref vfb vout
+x0 nbias nbias gnda gnda sky130_fd_pr__nfet_01v8 l='LTL' w='WTL*1' m='MB'
+x1 d1 vfb ntail gnda sky130_fd_pr__nfet_01v8 l='LIN' w='WIN*1' m='MDP'
+x2 eaout vref ntail gnda sky130_fd_pr__nfet_01v8 l='LIN' w='WIN*1' m='MDP'
+x3 d1 d1 vdda vdda sky130_fd_pr__pfet_01v8 l='LLD' w='WLD*1' m='MLD'
+x4 eaout d1 vdda vdda sky130_fd_pr__pfet_01v8 l='LLD' w='WLD*1' m='MLD'
+x5 ntail nbias gnda gnda sky130_fd_pr__nfet_01v8 l='LTL' w='WTL*1' m='MTL'
+x6 vdda eaout vgate vgate sky130_fd_pr__nfet_01v8_lvt l='LBF' w='WBF*1' m='MBF'
+x7 vgate nbias gnda gnda sky130_fd_pr__nfet_01v8 l='LSK' w='WSK*1' m='MSK'
+x8 vout vgate vdda vdda sky130_fd_pr__pfet_01v8_hvt l='LPASS' w='WPASS*1' m='MPASS'
+I0 vdda nbias 'IBIAS'
+.ends Ldo_NMOS_Buffer_HVT_Pin_3

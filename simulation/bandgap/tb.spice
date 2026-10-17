@@ -1,0 +1,67 @@
+Test bandgap voltage reference DC+AC (AnalogGym voltage-reference methodology)
+
+***************************************
+* Step 1: Circuit netlist (composed from topology) + sizing params + aux
+***************************************
+.include ./mybandgap.txt
+.include ./var.spice
+.include ./aux.spice
+.param mc_mm_switch=0
+.param mc_pr_switch=0
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/corners/tt.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/r+c/res_typical__cap_typical.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/r+c/res_typical__cap_typical__lin.spice
+.include @SKY130_PDK_ROOT@/libs.tech/ngspice/corners/tt/specialized_cells.spice
+
+***************************************
+* Step 2: Testbench conditions (AnalogGym voltage-reference methodology,
+* conditions adapted to sky130 1.8V devices like the LDO agent testbench):
+* VDDA=1.8V (AC=1 for PSRR), temp -45..125C, supply swept +-10%
+* (line sensitivity over 1.62..1.98V), AC 0.01Hz-100MHz.
+* aux.spice supplies VIREF (iref held at 1V) for topologies with a real
+* current-reference output, and the behavioral 'amplifier' macromodel when used.
+***************************************
+.PARAM supply_voltage = 1.8
+
+VDDA vdda 0 DC 'supply_voltage' AC 1
+VGNDA gnda 0 0
+
+* Xbg gnda vdda vref iref
+xbg1 gnda vdda vref iref bandgap
+
+.options gmin=1e-10 reltol=2e-3 rshunt=1e8 itl1=300
+
+.control
+save all
+set filetype=ascii
+set units=degrees
+
+* Temperature sweep: vref @25C, TC(vref), quiescent power @25C/1.8V
+dc temp -45 125 5
+meas dc vrefnom FIND v(vref) AT=25
+meas dc v_pp PP v(vref) from=-45 to=125
+meas dc v_avg AVG v(vref) from=-45 to=125
+let tcppm = abs(v_pp/v_avg)/170*1e6
+print tcppm
+meas dc ivddnom FIND i(VDDA) AT=25
+let powuw = abs(ivddnom)*1.8*1e6
+print powuw
+
+* Supply sweep: line sensitivity of vref over VDDA +-10%
+dc VDDA 1.62 1.98 0.005
+meas dc vls_pp PP v(vref) from=1.62 to=1.98
+meas dc vls_avg AVG v(vref) from=1.62 to=1.98
+let lsperv = abs(vls_pp/vls_avg)/0.36
+print lsperv
+
+* PSRR: AC=1 on VDDA, rejection = -vdb(vref) at 10Hz (near-DC) and 1MHz
+ac dec 10 0.01 100meg
+meas ac psrr_10 FIND vdb(vref) AT=10
+let psrrdc = -1*psrr_10
+print psrrdc
+meas ac psrr_1meg FIND vdb(vref) AT=1meg
+let psrrhf = -1*psrr_1meg
+print psrrhf
+
+.endc
+.end

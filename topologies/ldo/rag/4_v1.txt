@@ -1,0 +1,1 @@
+The circuit is a low-dropout regulator (LDO) featuring a PMOS pass transistor. Its error amplifier is an NMOS telescopic operational transconductance amplifier (OTA) with an NMOS differential input pair, and the pass device gate is compensated by an RC Miller compensation network.

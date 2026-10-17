@@ -1,0 +1,24 @@
+.subckt rn000376_bandgap_pin_2 gnda vdda vref iref
+* Bandgap-reference topology auto-extracted from IEEE paper figure (RN dataset case 000376
+* = 1202001_image_4). Device models mapped to sky130 primitives (nmos->nfet_01v8,
+* pmos->pfet_01v8, npn->npn_05v5, pnp->pnp_05v5); VDD->vdda, GND->gnda. L/W/M and R/C/I
+* values parameterized as unique variables. All-MOS voltage reference: diode/native NMOS
+* stack (M1/M4) + R1/R2 divider setting the reference tap. vref=R1/R2 divider node n2
+* (also the gate of output device M3).
+* iref is provided as a 0-ohm-linked alias of vref: these extracted fragments expose
+* a single reference node, so iref/vref share it for 4-pin interface compatibility.
+* WARNING: this extraction is DEGRADED -- the classifier detected only 4 devices (vs 5 in
+* the figure, one MOSFET dropped) and labeled all four nmos (top devices are likely PMOS
+* from Vcc in the real circuit). Transcribed VERBATIM from netlist/000376.cir ground truth;
+* NOT a verified working bandgap. Fix device polarity / add the missing device against the
+* paper figure before sizing.
+* NOTE: vref/iref pin assignment is INFERRED (source figure labels the output 'Vref' but the
+* extraction has no port); verify against the paper before using for sizing.
+xm1 vdda n0 n0 n0 sky130_fd_pr__nfet_01v8 l='N1_L' w='N1_W*1' m='N1_M'
+xm2 n0 n1 gnda gnda sky130_fd_pr__nfet_01v8 l='N2_L' w='N2_W*1' m='N2_M'
+R1 n1 vref 'RESISTOR_1'
+R2 vref gnda 'RESISTOR_2'
+xm3 vdda vref gnda gnda sky130_fd_pr__nfet_01v8 l='N3_L' w='N3_W*1' m='N3_M'
+xm4 vdda n0 n1 n1 sky130_fd_pr__nfet_01v8 l='N4_L' w='N4_W*1' m='N4_M'
+Rlink vref iref 0
+.ends rn000376_bandgap_pin_2

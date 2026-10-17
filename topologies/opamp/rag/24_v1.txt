@@ -1,0 +1,1 @@
+The circuit is a two-stage operational amplifier, with its first stage being a PMOS differential pair using an NMOS current mirror as its active load. The second stage consists of an NMOS common-source amplifier, actively loaded by a PMOS current source, which drives the output.

@@ -1,0 +1,26 @@
+.subckt rn000080_bandgap_pin_2 gnda vdda vref iref
+* Kuijk/Banba-style opamp bandgap VOLTAGE reference (RN case 000080), REDRAWN from the
+* paper figure /images/000080.png -- the auto-extracted netlist had scrambled node
+* connectivity, so this is transcribed directly from the schematic.
+* Opamp forces V(va)=V(vb); PMOS mirror M1/M2/M3 (gates = vc = opamp output) sets three
+* equal branch currents. Branch A (va): R1 to gnda in parallel with diode-connected Q1
+* (unit). Branch B (vb): R2(=R1) to gnda in parallel with [R0 + diode-connected Q2 (N
+* units)] -- dVBE develops across R0. Output branch: M3 -> vref, R3 to gnda -> the
+* temperature-compensated bandgap voltage V(vref) = I3*R3.
+* This is a pure voltage reference (the figure has no current-output pin); iref is exposed
+* only as a 0-ohm alias of vref for 4-pin interface compatibility.
+* The opamp is drawn behaviorally (triangle) in the figure and is kept here as an
+* 'amplifier' block -- it has NO sky130 primitive; the testbench must supply an opamp
+* .subckt named 'amplifier' (in- in+ out) or replace it with a transistor-level OTA.
+Xamp va vb vc amplifier
+xm1 va vc vdda vdda sky130_fd_pr__pfet_01v8 l='P1_L' w='P1_W*1' m='P1_M'
+xm2 vb vc vdda vdda sky130_fd_pr__pfet_01v8 l='P2_L' w='P2_W*1' m='P2_M'
+xm3 vref vc vdda vdda sky130_fd_pr__pfet_01v8 l='P3_L' w='P3_W*1' m='P3_M'
+xq1 va va gnda gnda sky130_fd_pr__npn_05v5_W1p00L1p00 m='Q1_M'
+xq2 qe2 qe2 gnda gnda sky130_fd_pr__npn_05v5_W1p00L1p00 m='Q2_M'
+R1 va gnda 'RESISTOR_1'
+R2 vb gnda 'RESISTOR_2'
+R0 vb qe2 'RESISTOR_3'
+R3 vref gnda 'RESISTOR_4'
+Rlink vref iref 0
+.ends rn000080_bandgap_pin_2

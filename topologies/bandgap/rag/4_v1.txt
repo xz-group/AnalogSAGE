@@ -1,0 +1,1 @@
+The circuit is a voltage-mode bandgap reference. An error amplifier ensures equal voltages at the emitter of a unit PNP and a node that generates a PTAT current from a deltaVbe across two PNPs. This PTAT current, combined with a current proportional to the 1x PNP's Vbe, is mirrored and driven through an output resistor to produce the temperature-compensated reference voltage.
